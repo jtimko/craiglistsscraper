@@ -3,20 +3,16 @@ from Sms import Sms
 import sys
 
 #contact phone
-phone = ""
+phone = "+"
 #twilio voip number
-twilio = ""
+twilio = "+"
 #twilio account sid
 account = ""
 #twilio auth token
 token = ""
 
-def main():
+def main(search_item):
     sms = Sms(account, token, phone, twilio)
-    scrape = Scraping(sys.argv[1])
-    results = scrape.grabData(sys.argv[2])
-
+    scrape = Scraping("https://sfbay.craigslist.org/d/musical-instruments/search/msa")
+    results = scrape.grabData(search_item)
     sms.sendSms(results)
-
-if __name__ == "__main__":
-    main()

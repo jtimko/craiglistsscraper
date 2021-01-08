@@ -14,10 +14,9 @@ class Scraping():
         titles = soup.find_all(class_="result-title")
         urls = soup.find_all('a', {"class": "result-title"}, href=True)
         hoods = soup.find_all(class_="result-hood")
-
         data = []
         for (title, url, hood) in zip(titles, urls, hoods):
-            if filter.lower() not in str(title).lower():
+            if str(filter).lower() not in str(title).lower():
                 pass
             else:
                 data.append(title.get_text() +" "+
