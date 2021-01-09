@@ -9,6 +9,5 @@ class Sms:
         self.client = Client(self.account, self.token)
 
     def sendSms(self, data):
-        for d in data:
-            self.client.messages.create(to=self.phone, from_=self.twilio,
-                                 body=d)
+        self.client.messages.create(to=self.phone, from_=self.twilio,
+                                 body=data)

@@ -6,7 +6,7 @@ class Scraping():
     def __init__(self, url):
         self.url = url
 
-    def grabData(self, filter):
+    def grabData(self):
         http = urllib3.PoolManager()
         r = http.request('GET', self.url)
         soup = BeautifulSoup(r.data, 'html.parser')
@@ -16,9 +16,6 @@ class Scraping():
         hoods = soup.find_all(class_="result-hood")
         data = []
         for (title, url, hood) in zip(titles, urls, hoods):
-            if str(filter).lower() not in str(title).lower():
-                pass
-            else:
-                data.append(title.get_text() +" "+
-                url['href'] + " "+ hood.get_text())
+            data.append(title.get_text() +" "+
+            url['href'] + " "+ hood.get_text())
         return data
