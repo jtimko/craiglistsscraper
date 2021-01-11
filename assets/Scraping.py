@@ -11,11 +11,12 @@ class Scraping():
         r = http.request('GET', self.url)
         soup = BeautifulSoup(r.data, 'html.parser')
 
+        ids = soup.find_all(attrs={"data-id": True})
         titles = soup.find_all(class_="result-title")
         urls = soup.find_all('a', {"class": "result-title"}, href=True)
         hoods = soup.find_all(class_="result-hood")
+
         data = []
-        for (title, url, hood) in zip(titles, urls, hoods):
-            data.append(title.get_text() +" "+
-            url['href'] + " "+ hood.get_text())
+        for (id, title, url, hood) in zip(ids, titles, urls, hoods):
+            data.append(tuple((id.get_text(), title.get_text(), url['href'], hood.get_text())))
         return data
